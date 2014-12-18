@@ -45,5 +45,5 @@ interface LambdaRecord {
  * where Records is not an array.
  */
 interface LambdaEvent {
-	Records?: Array<any>;
+  Records?: Array<any>;
 }
