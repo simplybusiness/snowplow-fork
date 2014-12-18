@@ -1,14 +1,14 @@
 {
   "name": "snowplow-lambda-analytics",
   "version": "0.1.0",
-  "description": "Contains utilities for working with Snowplow enriched events in AWS Lambda",
-  "main": "index.js",
+  "description": "Utilities for working with Snowplow enriched events in AWS Lambda",
+  "main": "lib/analytics.js",
   "keywords": [
     "snowplow",
     "lambda",
     "analytics"
     ],
-  "author": "Alexander Dean <support@snowplowanalytics.com",
+  "author": "Alexander Dean <support@snowplowanalytics.com>",
  "licenses": [{
     "type": "Apache-2.0",
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
