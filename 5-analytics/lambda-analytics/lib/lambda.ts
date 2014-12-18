@@ -44,8 +44,8 @@ interface LambdaRecord {
  *
  * WARNING: we don't handle the edge case
  * where a user sends in a user application event
- * where Records is not an array.
+ * where Records is of their own construction.
  */
 interface LambdaEvent {
-  Records?: Array<any>;
+  Records?: Array<LambdaRecord>;
 }
