@@ -20,8 +20,8 @@
 class KinesisRecord {
   data: string;
 
-  decode() {
-    new Buffer(this.data, 'base64').toString('ascii')
+  constructor(encoded: string) {
+    this.data = new Buffer(encoded, 'base64').toString('ascii');
   }
 }
 
@@ -31,7 +31,7 @@ class KinesisRecord {
 interface LambdaRecord {
   eventID: string;
   eventName: string;
-  kinesis?: KinesisRecord;
+  kinesis?: { data: string };
   s3?: any;
   Dynamodb?: any;
 }
