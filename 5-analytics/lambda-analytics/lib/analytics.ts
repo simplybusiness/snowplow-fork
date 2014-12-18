@@ -177,10 +177,10 @@ interface EnrichedEvent {
   doc_height: number;
 }
 
-function shredder(event : EnrichedEvent) {
-    return "Hello, " + event.app_id;
+function shredder(evt : EnrichedEvent): string {
+    return "Hello, " + evt.app_id;
 }
 
-var event = {app_id: "1"};
+//var evt = {app_id: "1"};
 
-document.body.innerHTML = shredder(event);
+//document.body.innerHTML = shredder(evt);

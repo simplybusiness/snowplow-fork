@@ -11,6 +11,8 @@
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
 
+/// <reference path="../typings/node/node.d.ts" />
+
 /**
  * A Kinesis record. Note that data is
  * Base64-encoded.
