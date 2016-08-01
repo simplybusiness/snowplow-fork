@@ -147,6 +147,8 @@ function upload_artifacts_to_bintray() {
             package_name="${kinesis_app_packages[$i]}"
             package_version="${kinesis_app_versions[$i]}"
 
+            echo "Uploading ${artifact_names[$i]} to package ${package_name} under version ${package_version}..."  
+
             # Check if version already exists
             http_status=`curl \
                 "https://api.bintray.com/packages/${bintray_repository}/${package_name}/versions/${package_version}/files/" \
@@ -159,6 +161,9 @@ function upload_artifacts_to_bintray() {
             # If return code is 2xx or 3xx validate that uploaded version is equivalent
             # to local version
             if [[ ${ok_classes[*]} =~ ${http_status_class} ]] ; then
+
+                echo "Artifact already uploaded; validating local and remote..."
+
                 remote_zip_path="./${dist_path}/temp_${artifact_names[$i]}"
                 remote_zip_url="https://bintray.com/${bintray_repository}/download_file?file_path=${artifact_names[$i]}"
 
@@ -170,6 +175,8 @@ function upload_artifacts_to_bintray() {
                     then
                         eval ${__out_error}="'Uploaded file for version ${package_version} in package ${package_name} does not match local zip.'"
                         break
+                else
+                    echo "Local and remote are the same, skipping upload."
                 fi
                 continue
             fi

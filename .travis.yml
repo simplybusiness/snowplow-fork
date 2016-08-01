@@ -26,6 +26,7 @@ before_install:
 addons:
   hostname: short-hostname
 before_deploy:
+  - sudo apt-get update
   - sudo apt-get install zipcmp -y
 deploy:
   skip_cleanup: true
