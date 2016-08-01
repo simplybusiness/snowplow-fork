@@ -159,8 +159,6 @@ function upload_artifacts_to_bintray() {
             # If return code is 2xx or 3xx validate that uploaded version is equivalent
             # to local version
             if [[ ${ok_classes[*]} =~ ${http_status_class} ]] ; then
-                sudo apt-get -qq install zipcmp -y
-
                 remote_zip_path="./${dist_path}/temp_${artifact_names[$i]}"
                 remote_zip_url="https://bintray.com/${bintray_repository}/download_file?file_path=${artifact_names[$i]}"
 
