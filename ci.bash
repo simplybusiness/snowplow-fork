@@ -150,17 +150,13 @@ function upload_artifacts_to_bintray() {
             echo "Uploading ${artifact_names[$i]} to package ${package_name} under version ${package_version}..."  
 
             # Check if version already exists
-            http_status=`curl \
+            uploaded_file_count=`curl \
                 "https://api.bintray.com/packages/${bintray_repository}/${package_name}/versions/${package_version}/files/" \
-                --write-out "%{http_code}\n" --silent --output /dev/null \
-                -u${bintray_user}:${bintray_api_key}`
-
-            http_status_class=${http_status:0:1}
-            ok_classes=("2" "3")
+                -u${bintray_user}:${bintray_api_key} | python -c 'import json,sys;obj=json.load(sys.stdin);print len(obj)'`
 
             # If return code is 2xx or 3xx validate that uploaded version is equivalent
             # to local version
-            if [[ ${ok_classes[*]} =~ ${http_status_class} ]] ; then
+            if [ "${uploaded_file_count}" -ne "0" ] ; then
 
                 echo "Artifact already uploaded; validating local and remote..."
 
