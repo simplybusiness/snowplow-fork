@@ -167,7 +167,7 @@ function upload_artifacts_to_bintray() {
                 remote_zip_path="./${dist_path}/temp_${artifact_names[$i]}"
                 remote_zip_url="https://bintray.com/${bintray_repository}/download_file?file_path=${artifact_names[$i]}"
 
-                wget --quiet -O ${remote_zip_path} ${remote_zip_url}
+                wget -O ${remote_zip_path} ${remote_zip_url}
                 zipcmp ${remote_zip_path} ${artifact_paths[$i]}
                 cmp_result=`echo $?`
 
