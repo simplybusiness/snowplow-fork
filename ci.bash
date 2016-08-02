@@ -164,13 +164,11 @@ function upload_artifacts_to_bintray() {
                 remote_zip_url="https://bintray.com/${bintray_repository}/download_file?file_path=${artifact_names[$i]}"
 
                 wget -O ${remote_zip_path} ${remote_zip_url}
-                zipcmp ${remote_zip_path} ${artifact_paths[$i]}
-                cmp_result=`echo $?`
+                cmp_exit_code=`zipcmp ${remote_zip_path} ${artifact_paths[$i]} > /dev/null 2>&1; echo $?`
 
-                if [ "${cmp_result}" -ne "0" ]
-                    then
-                        eval ${__out_error}="'Uploaded file for version ${package_version} in package ${package_name} does not match local zip.'"
-                        break
+                if [ "${cmp_exit_code}" -ne "0" ] ; then
+                    eval ${__out_error}="'Uploaded file for version ${package_version} in package ${package_name} does not match local zip.'"
+                    break
                 else
                     echo "Local and remote are the same, skipping upload."
                 fi
